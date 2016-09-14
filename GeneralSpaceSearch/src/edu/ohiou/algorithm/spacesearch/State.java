@@ -9,7 +9,6 @@ public abstract class State {
 
 	// Default Constructor
 	protected State() {
-		// Initialize default state formatting
 		this.stateLen = 0;
 		this.stateVal = new char[this.stateLen];
 	}

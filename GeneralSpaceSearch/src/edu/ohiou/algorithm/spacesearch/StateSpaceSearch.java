@@ -56,7 +56,7 @@ public class StateSpaceSearch {
 				this.closed.addLast(curState);
 				
 				// Add all child nodes to the Open queue
-				ArrayList<State> children = curState.getChildren(curState);
+				ArrayList<State> children = curState.getChildren(curState); //This is the transition function, different implementation for different types of state representation
 				if(children.isEmpty()){ 
 					//If children list empty, it's a leaf
 					System.out.print("Leaf ");

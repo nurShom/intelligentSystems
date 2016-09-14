@@ -51,21 +51,16 @@ public abstract class State {
 	// To facilitate "equals" and "list.contains" methods for State type:
 	@Override
 	public boolean equals(Object st) {
-		if (st == null) {
-			return false;
-		}
 		if (st == this) {
 			return true;
 		}
-		State s = null;
-		if (st instanceof State) {
-			s = (State) st;
-		} else {
-			return false;
-		}
-		if (this.getStateString().equals(s.getStateString()) && this.getLength() == s.getLength()) {
-			return true;
-		}
+		if (st instanceof State && st != null) {
+			State s = (State) st;
+			if (this.getStateString().equals(s.getStateString()) && this.getLength() == s.getLength()) {
+				return true;
+			}
+		} 
+		
 		return false;
 	}
 

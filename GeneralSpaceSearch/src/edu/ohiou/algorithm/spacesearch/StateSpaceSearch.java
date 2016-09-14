@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class StateSpaceSearch {
 	
-	public enum StateOrdering{DFS, BFS}; //FIFO, LIFO
+	public enum StateOrdering{DFS, BFS}; //LIFO, FIFO
 	
 	private ArrayDeque<State> open, closed;
 	private StateOrdering order = null;
@@ -35,7 +35,6 @@ public class StateSpaceSearch {
 			// Default case: DFS
 			return this.open.pollLast();
 		}
-		
 	}
 	
 	// public boolean spaceSearch(State initState, State goalState, Callable<String> transitionState) {

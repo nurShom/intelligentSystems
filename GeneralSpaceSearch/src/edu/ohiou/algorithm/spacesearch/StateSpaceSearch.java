@@ -43,11 +43,12 @@ public class StateSpaceSearch {
 		State curState = initState;
 		if (curState.equals(goalState)) {
 			//If goal reached, print goal state
-			System.out.println("Goal reached: " + curState.getStateString());
+			System.out.println("Goal reached: " + curState.toString());
 			return true;
 		} else if(this.closed.contains(curState)) {
 			//This node already visited, try the next node
-			//System.out.println("Visited before: " + curState.getStateString());
+			
+//			System.out.println("Visited before: " + curState.toString());
 			
 		} else{
 			try{
@@ -65,7 +66,7 @@ public class StateSpaceSearch {
 						this.open.addLast(child);
 					}
 				}
-				System.out.println("Node reached: " + curState.getStateString());
+				System.out.println("Node reached: " + curState.toString());
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -76,8 +77,8 @@ public class StateSpaceSearch {
 	}
 	
 	public void execute(State initState, State goalState, StateOrdering order){
-		this.order = order;
-		this.clearList();
+		this.order = order; //sets the order of search
+		this.clearList(); //clears the open and closed lists.
 		this.spaceSearch(initState, goalState);
 
 //		Callable c = new Callable<Integer>() {
@@ -90,20 +91,30 @@ public class StateSpaceSearch {
 	
 	public static void main(String args[]){
 		StateSpaceSearch sps = new StateSpaceSearch();
-		State init = new FWGC("LLLL");
-		State goal = new FWGC("RRRR");
 		
+		System.out.println("WATER-JUG Problem:");
+		State init = new WaterJug(0, 0);
+		State goal = new WaterJug(2, 0);
 		System.out.println("Attempting DFS:");
 		sps.execute(init, goal, StateOrdering.DFS);
+		System.out.println("\nAttempting BFS:");
+		sps.execute(init, goal, StateOrdering.BFS);
+		System.out.println();
 		
+
+		System.out.println("FWGC Problem:");
+		init = new FWGC("LLLL");
+		goal = new FWGC("RRRR");
+		System.out.println("Attempting DFS:");
+		sps.execute(init, goal, StateOrdering.DFS);
 		System.out.println("\nAttempting BFS:");
 		sps.execute(init, goal, StateOrdering.BFS);
 				
 //		State fw = new FWGC("LLLL");	
-//		System.out.println("node: "+fw.getStateString());
+//		System.out.println("node: "+fw.toString());
 //		System.out.print("children: ");
 //		for(State ch : fw.getChildren(fw)){
-//			System.out.print(ch.getStateString() + " ");
+//			System.out.print(ch.toString() + " ");
 //		}
 		
 	}

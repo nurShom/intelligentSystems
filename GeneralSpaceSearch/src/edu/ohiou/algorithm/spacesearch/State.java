@@ -23,4 +23,10 @@ public abstract class State {
 
 	protected abstract ArrayList<State> getChildren(State state);
 	
+	protected void printChildren(State st) {
+		for(State child : this.getChildren(st)){
+			System.out.println(child.toString());
+		}
+	}
+	
 }

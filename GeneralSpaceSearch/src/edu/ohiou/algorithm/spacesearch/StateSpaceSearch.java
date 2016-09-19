@@ -99,10 +99,8 @@ public class StateSpaceSearch {
 		sps.execute(init, goal, StateOrdering.DFS);
 		System.out.println("\nAttempting BFS:");
 		sps.execute(init, goal, StateOrdering.BFS);
-		System.out.println();
 		
-
-		System.out.println("FWGC Problem:");
+		System.out.println("\nFWGC Problem:");
 		init = new FWGC("LLLL");
 		goal = new FWGC("RRRR");
 		System.out.println("Attempting DFS:");
@@ -110,13 +108,14 @@ public class StateSpaceSearch {
 		System.out.println("\nAttempting BFS:");
 		sps.execute(init, goal, StateOrdering.BFS);
 				
-//		State fw = new FWGC("LLLL");	
-//		System.out.println("node: "+fw.toString());
-//		System.out.print("children: ");
-//		for(State ch : fw.getChildren(fw)){
-//			System.out.print(ch.toString() + " ");
-//		}
-		
+		System.out.println("\nTSP Problem:");
+		init = new TSP("Athens");
+		goal = new TSP("Athens");
+		System.out.println("Attempting DFS:");
+		sps.execute(init, goal, StateOrdering.DFS);
+		System.out.println("\nAttempting BFS:");
+		sps.execute(init, goal, StateOrdering.BFS);
+
 	}
 
 }

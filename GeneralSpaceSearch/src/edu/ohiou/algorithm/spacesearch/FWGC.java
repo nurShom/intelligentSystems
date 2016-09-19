@@ -180,5 +180,4 @@ public class FWGC extends State {
 		}
 	}
 
-
 }

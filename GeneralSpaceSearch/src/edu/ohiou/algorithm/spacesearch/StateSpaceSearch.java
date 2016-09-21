@@ -38,6 +38,7 @@ public class StateSpaceSearch {
 	}
 	
 	// public boolean spaceSearch(State initState, State goalState, Callable<String> transitionState) {
+	@SuppressWarnings("unchecked")
 	public boolean spaceSearch(State initState, State goalState) {
 
 		State curState = initState;
@@ -56,7 +57,7 @@ public class StateSpaceSearch {
 				this.closed.addLast(curState);
 				
 				// Add all child nodes to the Open queue
-				ArrayList<State> children = curState.getChildren(curState); //This is the transition function, different implementation for different types of state representation
+				ArrayList<State> children = (ArrayList<State>) curState.getChildren(curState); //This is the transition function, different implementation for different types of state representation
 				if(children.isEmpty()){ 
 					//If children list empty, it's a leaf
 					System.out.print("Leaf ");
@@ -109,8 +110,8 @@ public class StateSpaceSearch {
 		sps.execute(init, goal, StateOrdering.BFS);
 				
 		System.out.println("\nTSP Problem:");
-		init = new TSP("Athens");
-		goal = new TSP("Athens");
+		init = new TSP01("Athens");
+		goal = new TSP01("Cincinnati");
 		System.out.println("Attempting DFS:");
 		sps.execute(init, goal, StateOrdering.DFS);
 		System.out.println("\nAttempting BFS:");

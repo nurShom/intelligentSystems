@@ -21,7 +21,7 @@ public abstract class State {
 
 	protected abstract State getChild(State st, String move);
 
-	protected abstract ArrayList<State> getChildren(State state);
+	protected abstract ArrayList<? extends State> getChildren(State state);
 	
 	protected void printChildren(State st) {
 		for(State child : this.getChildren(st)){

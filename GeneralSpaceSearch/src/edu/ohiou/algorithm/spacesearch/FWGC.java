@@ -127,7 +127,7 @@ public class FWGC extends State {
 	}
 	
 	@Override
-	protected ArrayList<State> getChildren(State state) {
+	protected ArrayList<? extends State> getChildren(State state) {
 		ArrayList<State> states = new ArrayList<State>();
 		
 		for(String move: FWGC.moves){

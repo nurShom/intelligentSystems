@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-public class TSP01 extends State implements Comparable<TSP01> {
+public class TSP_test01 extends State implements Comparable<TSP_test01> {
 	
 	private static final int[][] distanceMatrix = { { 0, 75, 155, 206, 46 }, { 75, 0, 105, 137, 120 },
 			{ 155, 105, 0, 241, 225 }, { 206, 137, 241, 0, 160 }, { 46, 120, 225, 160, 0 } };
@@ -34,28 +34,28 @@ public class TSP01 extends State implements Comparable<TSP01> {
 	
 	
 	private String city = null;
-	private ArrayList<TSP01> children = null;
+	private ArrayList<TSP_test01> children = null;
 	private String parent = null;
 	
 	// default constructor
-	public TSP01() {
+	public TSP_test01() {
 //		this.setCity(null);
 //		this.setChildren(null);
 //		this.setParent(null);
 	}
 	
 	// copy constructor
-	public TSP01(State st) {
-		this.setCity(((TSP01) st).getCity());
-		this.setChildren(((TSP01) st).getChildrenList());
-		this.setParent(((TSP01) st).getParent());
+	public TSP_test01(State st) {
+		this.setCity(((TSP_test01) st).getCity());
+		this.setChildren(((TSP_test01) st).getChildrenList());
+		this.setParent(((TSP_test01) st).getParent());
 	}
 	
 	// city value only constructor, parent unknown. Maybe the root node
-	public TSP01(String city) {
+	public TSP_test01(String city) {
 		this.setChildren(null);
 		this.setParent(null);
-		if(TSP01.cityIndex.containsKey(city)){
+		if(TSP_test01.cityIndex.containsKey(city)){
 			this.setCity(city);
 		}
 		else{
@@ -64,10 +64,10 @@ public class TSP01 extends State implements Comparable<TSP01> {
 	}
 	
 	// value assigning constructor
-	public TSP01(String city, String parent) {
+	public TSP_test01(String city, String parent) {
 		this.setChildren(null);
 		this.setParent(parent);
-		if(TSP01.cityIndex.containsKey(city)){
+		if(TSP_test01.cityIndex.containsKey(city)){
 			this.setCity(city);
 		}
 		else{
@@ -77,14 +77,14 @@ public class TSP01 extends State implements Comparable<TSP01> {
 	
 	private void initializeChildren(){
 		this.setChildren(null);
-		ArrayList<TSP01> nextCities = new ArrayList<TSP01>();
-		int index = TSP01.cityIndex.get(this.getCity());
+		ArrayList<TSP_test01> nextCities = new ArrayList<TSP_test01>();
+		int index = TSP_test01.cityIndex.get(this.getCity());
 		int dis = 0;
 		for(int i=0; i<cityIndex.size(); i++ ){
-			dis = TSP01.distanceMatrix[index][i];
+			dis = TSP_test01.distanceMatrix[index][i];
 			if(dis != 0){
-				String city = TSP01.getKeyByValue(TSP01.cityIndex, i);
-				nextCities.add(new TSP01(city, this.getCity()));
+				String city = TSP_test01.getKeyByValue(TSP_test01.cityIndex, i);
+				nextCities.add(new TSP_test01(city, this.getCity()));
 			}
 		}
 		Collections.sort(nextCities, Collections.reverseOrder());
@@ -103,11 +103,11 @@ public class TSP01 extends State implements Comparable<TSP01> {
 		this.city = city;
 	}
 
-	public ArrayList<TSP01> getChildrenList() {
+	public ArrayList<TSP_test01> getChildrenList() {
 		return this.children;
 	}
 	
-	public void setChildren(ArrayList<TSP01> children) {
+	public void setChildren(ArrayList<TSP_test01> children) {
 		this.children = children;
 	}
 
@@ -124,8 +124,8 @@ public class TSP01 extends State implements Comparable<TSP01> {
 		if (st == this) {
 			return true;
 		}
-		if (st instanceof TSP01 && st != null) {
-			TSP01 s = (TSP01) st;
+		if (st instanceof TSP_test01 && st != null) {
+			TSP_test01 s = (TSP_test01) st;
 			if (this.getCity().equals(s.getCity())) {
 				return true;
 			}
@@ -143,21 +143,21 @@ public class TSP01 extends State implements Comparable<TSP01> {
 	public String toString() {
 		int distance = 0;
 		if (this.getParent() != null) {
-			distance = TSP01.distanceMatrix[TSP01.cityIndex.get(this.getParent())][TSP01.cityIndex.get(this.getCity())];
+			distance = TSP_test01.distanceMatrix[TSP_test01.cityIndex.get(this.getParent())][TSP_test01.cityIndex.get(this.getCity())];
 		}
 		return "[" + this.parent + "->" + this.getCity() + ":: " + distance + "]";
 	}
 
 	// compares between the distances of cities with their respective parent node 
 	@Override
-	public int compareTo(TSP01 t2) {
-		int ind1P = TSP01.cityIndex.get(this.getParent());
-		int ind1 = TSP01.cityIndex.get(this.getCity());
+	public int compareTo(TSP_test01 t2) {
+		int ind1P = TSP_test01.cityIndex.get(this.getParent());
+		int ind1 = TSP_test01.cityIndex.get(this.getCity());
 		
-		int ind2P = TSP01.cityIndex.get(t2.getParent());
-		int ind2 = TSP01.cityIndex.get(t2.getCity());
+		int ind2P = TSP_test01.cityIndex.get(t2.getParent());
+		int ind2 = TSP_test01.cityIndex.get(t2.getCity());
 		
-		return ((Integer) TSP01.distanceMatrix[ind1P][ind1]).compareTo(TSP01.distanceMatrix[ind2P][ind2]);
+		return ((Integer) TSP_test01.distanceMatrix[ind1P][ind1]).compareTo(TSP_test01.distanceMatrix[ind2P][ind2]);
 	}
 	
 	@Override
@@ -179,7 +179,7 @@ public class TSP01 extends State implements Comparable<TSP01> {
 
 	public static void main(String[] args) {
 
-		TSP01 tsp = new TSP01("Athens");
+		TSP_test01 tsp = new TSP_test01("Athens");
 		tsp.printChildren(tsp);
 		//tsp.setChildren(null);
 		tsp.setCity("Cleveland");

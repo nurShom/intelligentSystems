@@ -19,7 +19,7 @@ public abstract class State {
 	@Override
 	public abstract String toString();
 
-	protected abstract State getChild(State st, String move);
+	protected abstract State getChild(State state, String move);
 
 	protected abstract ArrayList<? extends State> getChildren(State state);
 	

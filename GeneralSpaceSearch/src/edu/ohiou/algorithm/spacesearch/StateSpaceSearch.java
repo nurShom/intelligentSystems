@@ -110,8 +110,8 @@ public class StateSpaceSearch {
 		sps.execute(init, goal, StateOrdering.BFS);
 				
 		System.out.println("\nTSP Problem:");
-		init = new TSP01("Athens");
-		goal = new TSP01("Cincinnati");
+		init = new TSP("Athens", "Cincinnati");
+		goal = ((TSP) init).getGoalState();
 		System.out.println("Attempting DFS:");
 		sps.execute(init, goal, StateOrdering.DFS);
 		System.out.println("\nAttempting BFS:");

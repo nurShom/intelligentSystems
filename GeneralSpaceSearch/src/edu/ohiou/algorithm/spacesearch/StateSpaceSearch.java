@@ -37,7 +37,6 @@ public class StateSpaceSearch {
 		}
 	}
 	
-	// public boolean spaceSearch(State initState, State goalState, Callable<String> transitionState) {
 	@SuppressWarnings("unchecked")
 	public boolean spaceSearch(State initState, State goalState) {
 
@@ -114,6 +113,7 @@ public class StateSpaceSearch {
 		goal = ((TSP) init).getGoalState();
 		System.out.println("Attempting DFS:");
 		sps.execute(init, goal, StateOrdering.DFS);
+		TSP.clearResult();
 		System.out.println("\nAttempting BFS:");
 		sps.execute(init, goal, StateOrdering.BFS);
 

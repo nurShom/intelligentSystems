@@ -26,11 +26,15 @@ public class TSP extends State {
 	}
 	private static final int[][] distanceMatrix = { { 0, 75, 155, 206, 46 }, { 75, 0, 105, 137, 120 },
 			{ 155, 105, 0, 241, 225 }, { 206, 137, 241, 0, 160 }, { 46, 120, 225, 160, 0 } };
+	
+	private static int bestDistance = 1000000;
+	private static TSP bestRoute = null;
 	//STATIC BLOCK ENDS
 	
 	private Deque<String> visited = null;
 	private List<String> unvisited = null;
 	private String goalCity = null;
+	private int distance = 0;
 	private Completeness stateStatus = TSP.Completeness.Incomplete;
 
 	// default constructor
@@ -115,6 +119,14 @@ public class TSP extends State {
 		this.stateStatus = stateStatus;
 	}
 
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
 	@Override
 	public boolean equals(Object st) {
 		if (st == this) {
@@ -161,7 +173,8 @@ public class TSP extends State {
 		if(state.endsWith(", ")){
 			state = state.trim().substring(0, state.length()-2);
 		}
-		state = state + "} => [" + this.getGoalCity() + "] (\"" + this.getStateStatus() + "\")";
+		state += "} => [" + this.getGoalCity() + "] (\"" + this.getStateStatus() + "\")";
+		state += " Distance covered: " + this.getDistance() + ", Best Distance: " + TSP.bestDistance;
 		
 		return state ;
 	}
@@ -174,6 +187,18 @@ public class TSP extends State {
 		if(tsp.getUnvisited().isEmpty()){
 			tsp.setStateStatus(TSP.Completeness.Complete);
 		}
+		int dist = 0;
+		List<String> visited = new ArrayList<String>(tsp.getVisited()); 
+		for(int i=0; i<visited.size()-1; i++){
+			dist += TSP.distanceMatrix[TSP.cityList.get(visited.get(i))][TSP.cityList.get(visited.get(i+1))];
+		}
+		tsp.setDistance(dist);
+		
+		if((tsp.getStateStatus()==TSP.Completeness.Complete) && (dist < TSP.bestDistance)){
+			TSP.bestDistance = dist;
+			TSP.bestRoute = tsp;
+		}
+		
 		return tsp;
 	}
 
@@ -204,6 +229,11 @@ public class TSP extends State {
 		tsp.setStateStatus(TSP.Completeness.Complete );
 		
 		return tsp;
+	}
+	
+	protected static void clearResult(){
+		TSP.bestDistance = 1000000;
+		TSP.bestRoute = null;
 	}
 
 	public static void main(String[] args) {

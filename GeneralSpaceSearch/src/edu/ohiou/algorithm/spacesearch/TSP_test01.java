@@ -187,5 +187,16 @@ public class TSP_test01 extends State implements Comparable<TSP_test01> {
 
 	}
 
+	@Override
+	protected boolean isGoalState(State state) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected ProblemType getProblemType() {
+		return State.ProblemType.Optimization;
+	}
+
 
 }

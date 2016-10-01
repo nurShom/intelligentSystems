@@ -3,6 +3,8 @@ package edu.ohiou.algorithm.spacesearch;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import edu.ohiou.algorithm.spacesearch.State.ProblemType;
+
 public class WaterJug extends State {
 
 	//j4: 0, 1, 2, 3, 4
@@ -147,6 +149,11 @@ public class WaterJug extends State {
 		return "[J4: "+ this.getJ4() +", J3: " +this.getJ3() + "]";
 	}
 
+	@Override
+	protected ProblemType getProblemType() {
+		return State.ProblemType.ConstraintSearch;
+	}
+
 	public static void main(String[] args) {
 		State wj = new WaterJug(4, 0);	
 		System.out.println("node: "+wj.toString());
@@ -154,6 +161,12 @@ public class WaterJug extends State {
 		for(State ch : wj.getChildren(wj)){
 			System.out.println("Child: " + ch.toString());
 		}
+	}
+
+	@Override
+	protected boolean isGoalState(State state) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

@@ -169,6 +169,11 @@ public class FWGC extends State {
 	public String toString() {
 		return this.getStateString();
 	}
+
+	@Override
+	protected ProblemType getProblemType() {
+		return State.ProblemType.ConstraintSearch;
+	}
 	
 	public static void main(String[] args){
 		State fw = new FWGC("RLRL");
@@ -178,6 +183,12 @@ public class FWGC extends State {
 		for(State ch : fw.getChildren(fw)){
 			System.out.print(ch.toString() + " ");
 		}
+	}
+
+	@Override
+	protected boolean isGoalState(State state) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

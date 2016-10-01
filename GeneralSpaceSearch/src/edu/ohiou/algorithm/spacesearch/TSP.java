@@ -27,8 +27,8 @@ public class TSP extends State {
 	private static final int[][] distanceMatrix = { { 0, 75, 155, 206, 46 }, { 75, 0, 105, 137, 120 },
 			{ 155, 105, 0, 241, 225 }, { 206, 137, 241, 0, 160 }, { 46, 120, 225, 160, 0 } };
 	
-	private static int bestDistance = 1000000;
-	private static TSP bestRoute = null;
+	private static int bestDistance = Integer.MAX_VALUE;
+	private static TSP currentGoal = null;
 	//STATIC BLOCK ENDS
 	
 	private Deque<String> visited = null;
@@ -53,7 +53,6 @@ public class TSP extends State {
 	
 	// copy constructor
 	public TSP(State state) {
-		this();
 		if (state instanceof TSP) {
 			TSP tsp = (TSP) state;
 			this.setVisited(tsp.getVisited());
@@ -108,7 +107,9 @@ public class TSP extends State {
 	}
 
 	protected void setGoalCity(String goalCity) {
-		this.goalCity = new String(goalCity.toCharArray());
+		if(TSP.cityList.containsKey(goalCity)){
+			this.goalCity = new String(goalCity.toCharArray());
+		}
 	}
 
 	public Completeness getStateStatus() {
@@ -180,23 +181,30 @@ public class TSP extends State {
 	}
 
 	@Override
+	protected ProblemType getProblemType() {
+		return State.ProblemType.Optimization;
+	}
+
+	@Override
 	protected State getChild(State state, String move) {
 		TSP tsp = new TSP(state);
 		tsp.addVisited(move);
 		tsp.removeUnvisited(move);
-		if(tsp.getUnvisited().isEmpty()){
-			tsp.setStateStatus(TSP.Completeness.Complete);
-		}
 		int dist = 0;
-		List<String> visited = new ArrayList<String>(tsp.getVisited()); 
-		for(int i=0; i<visited.size()-1; i++){
+		List<String> visited = new ArrayList<String>(tsp.getVisited());
+		int i=0;
+		for(i=0; i<visited.size()-1; i++){
 			dist += TSP.distanceMatrix[TSP.cityList.get(visited.get(i))][TSP.cityList.get(visited.get(i+1))];
 		}
 		tsp.setDistance(dist);
-		
-		if((tsp.getStateStatus()==TSP.Completeness.Complete) && (dist < TSP.bestDistance)){
-			TSP.bestDistance = dist;
-			TSP.bestRoute = tsp;
+		if(tsp.getUnvisited().isEmpty()){
+			tsp.setStateStatus(TSP.Completeness.Complete);
+			dist += TSP.distanceMatrix[TSP.cityList.get(visited.get(i))][TSP.cityList.get(tsp.getGoalCity())];
+			
+			if(dist < TSP.bestDistance){
+				TSP.bestDistance = dist;
+				TSP.currentGoal = tsp;
+			}
 		}
 		
 		return tsp;
@@ -213,27 +221,24 @@ public class TSP extends State {
 	}
 	
 	protected State getGoalState(){
-		TSP tsp = new TSP();
-		tsp.setGoalCity(this.getGoalCity());
-		
-		Deque<String> fullpath = new ArrayDeque<String>();
-		String head = this.getVisited().peekFirst(); 
-		fullpath.add(head);
-		for(String city : TSP.cityList.keySet()){
-			if((!city.equals(head)) && (!city.equals(goalCity))){
-				fullpath.addLast(city);
-			}
-		}
-		tsp.setVisited(fullpath);
-		
-		tsp.setStateStatus(TSP.Completeness.Complete );
-		
-		return tsp;
+		return TSP.currentGoal;
 	}
 	
-	protected static void clearResult(){
-		TSP.bestDistance = 1000000;
-		TSP.bestRoute = null;
+	protected boolean isGoalState(State state){
+		if(state instanceof TSP){
+		TSP tsp = (TSP) state;
+			if(tsp.getStateStatus() == TSP.Completeness.Complete && tsp.getDistance() < TSP.currentGoal.getDistance()){
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	protected void clearState(){
+		TSP.bestDistance = Integer.MAX_VALUE;
+		TSP.currentGoal = new TSP();
+		TSP.currentGoal.setDistance(Integer.MAX_VALUE);
 	}
 
 	public static void main(String[] args) {

@@ -3,6 +3,8 @@ package edu.ohiou.algorithm.spacesearch;
 import java.util.ArrayList;
 
 public abstract class State {
+	
+	public static enum ProblemType{ConstraintSearch, Optimization}; //LIFO, FIFO 
 
 	// Default Constructor
 	protected State() {
@@ -22,6 +24,12 @@ public abstract class State {
 	protected abstract State getChild(State state, String move);
 
 	protected abstract ArrayList<? extends State> getChildren(State state);
+	
+	protected abstract boolean isGoalState(State state);
+	
+	protected abstract ProblemType getProblemType();
+	
+	protected abstract void clearState();
 	
 	protected void printChildren(State st) {
 		for(State child : this.getChildren(st)){

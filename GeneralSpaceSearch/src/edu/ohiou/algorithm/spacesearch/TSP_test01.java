@@ -194,8 +194,14 @@ public class TSP_test01 extends State implements Comparable<TSP_test01> {
 	}
 
 	@Override
-	protected ProblemType getProblemType() {
-		return State.ProblemType.Optimization;
+	protected ProblemClass getProblemClass() {
+		return State.ProblemClass.Optimization;
+	}
+
+	@Override
+	protected void clearState() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class State {
 	
-	public static enum ProblemType{ConstraintSearch, Optimization}; //LIFO, FIFO 
+	public static enum ProblemClass{ConstraintSearch, Optimization}; //LIFO, FIFO 
 
 	// Default Constructor
 	protected State() {
@@ -27,7 +27,7 @@ public abstract class State {
 	
 	protected abstract boolean isGoalState(State state);
 	
-	protected abstract ProblemType getProblemType();
+	protected abstract ProblemClass getProblemClass();
 	
 	protected abstract void clearState();
 	

@@ -123,10 +123,10 @@ public class StateSpaceSearch {
 	public void execute(State initState, State goalState, StateOrdering order){
 		this.order = order; //sets the order of search
 		this.clearList(); //clears the open and closed lists.
-		if(initState.getProblemType() == State.ProblemType.ConstraintSearch){
+		if(initState.getProblemClass() == State.ProblemClass.ConstraintSearch){
 			this.spaceSearch(initState, goalState);
 		}
-		else if(initState.getProblemType() == State.ProblemType.Optimization){
+		else if(initState.getProblemClass() == State.ProblemClass.Optimization){
 			
 			this.spaceSearch(initState);
 		}

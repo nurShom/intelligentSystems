@@ -171,8 +171,8 @@ public class FWGC extends State {
 	}
 
 	@Override
-	protected ProblemType getProblemType() {
-		return State.ProblemType.ConstraintSearch;
+	protected ProblemClass getProblemClass() {
+		return State.ProblemClass.ConstraintSearch;
 	}
 	
 	public static void main(String[] args){
@@ -189,6 +189,12 @@ public class FWGC extends State {
 	protected boolean isGoalState(State state) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	protected void clearState() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

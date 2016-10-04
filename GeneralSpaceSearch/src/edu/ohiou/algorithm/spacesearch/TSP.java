@@ -181,8 +181,8 @@ public class TSP extends State {
 	}
 
 	@Override
-	protected ProblemType getProblemType() {
-		return State.ProblemType.Optimization;
+	protected ProblemClass getProblemClass() {
+		return State.ProblemClass.Optimization;
 	}
 
 	@Override

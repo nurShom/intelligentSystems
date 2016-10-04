@@ -161,6 +161,9 @@ public class TSP extends State {
 		return 378 + this.getGoalCity().hashCode() + this.getVisited().hashCode() + this.getUnvisited().hashCode();
 	}
 
+	/** 
+	 * Returns a detailed representation of the state
+	 **/
 	@Override
 	public String toString() {
 		String state = "[";
@@ -197,6 +200,9 @@ public class TSP extends State {
 			dist += TSP.distanceMatrix[TSP.cityList.get(visited.get(i))][TSP.cityList.get(visited.get(i+1))];
 		}
 		tsp.setDistance(dist);
+		
+		//Reached a solution.
+		//Check if this is a better solution: 
 		if(tsp.getUnvisited().isEmpty()){
 			tsp.setStateStatus(TSP.Completeness.Complete);
 			dist += TSP.distanceMatrix[TSP.cityList.get(visited.get(i))][TSP.cityList.get(tsp.getGoalCity())];
@@ -220,7 +226,7 @@ public class TSP extends State {
 		return children;
 	}
 	
-	protected State getGoalState(){
+	protected State getCurrentGoal(){
 		return TSP.currentGoal;
 	}
 	
@@ -251,7 +257,7 @@ public class TSP extends State {
 		System.out.println(init.toString() + "\n---Children:");
 		init.printChildren(init);
 		System.out.println("--------------------");
-		State goal = ((TSP) init).getGoalState();
+		State goal = ((TSP) init).getCurrentGoal();
 		System.out.println(goal.toString() + "\n---Children:");
 		goal.printChildren(goal);
 		

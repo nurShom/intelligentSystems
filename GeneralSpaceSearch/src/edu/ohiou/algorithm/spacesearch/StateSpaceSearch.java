@@ -81,10 +81,11 @@ public class StateSpaceSearch {
 		State curState = initState;
 
 		
-		if (curState.isGoalState(curState)) { 
-			//If goal reached, print goal state
+		if (curState.isGoalState(curState)) {  
 			System.out.println("Goal reached: " + curState.toString());
+			/* For Optimization problems, we don't stop traversing: */
 			//return true;
+			/* We will execute an exhaustive search and go through all of the nodes*/
 		} else if(this.closed.contains(curState)) {
 			//This node already visited, try the next node
 			
@@ -114,6 +115,7 @@ public class StateSpaceSearch {
 			}
 		}
 		State nextChild = this.getNextChildInOrder();
+		//Exhaustive search, keep repeating until the queue is empty:
 		if(nextChild==null){
 			return true;
 		}
@@ -161,7 +163,7 @@ public class StateSpaceSearch {
 				
 		System.out.println("\nTSP Problem:");
 		init = new TSP("Athens", "Athens");
-		goal = ((TSP) init).getGoalState();
+		//goal = ((TSP) init).getCurrentGoal();
 		System.out.println("Attempting DFS:");
 		sps.execute(init, init, StateOrdering.DFS);
 		init.clearState();

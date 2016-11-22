@@ -1,0 +1,7 @@
+
+
+
+
+(run)
+
+;batch "blocks.clp";

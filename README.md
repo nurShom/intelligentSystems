@@ -8,8 +8,8 @@
 # When used with Eclipse IDE, add these JARs as external libraries.
 # Also for Eclipse, these configurations needed to run and modify Jess codes with IDE support:
 
-# 1. Download ....jar file
-# 2. Expand "" file in Eclipse home directory
+# 1. Download "".jar file
+# 2. Expand "".jar file in Eclipse home directory
 # 3. Check in "plugins" and "features" folders in Eclipse directory to see new packages added
 
 # 5. From Help menu, select "Install New Software..."

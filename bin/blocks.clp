@@ -6,13 +6,15 @@
 
 (deftemplate goal
     (slot move)
-    (slot on-top-of))
+    (slot on-top-of)
+    (slot state)
+    )
 
 ;;;;;;;;;;Initial Facts
-(batch "case01.clp")
+;(batch "case01.clp")
 ;(batch "case02.clp")
 ;(batch "case03.clp")
-;(batch "case04.clp")
+(batch "case04.clp")
 
 
 
@@ -73,6 +75,7 @@
     (block ?other)
     =>
     (assert (goal (move ?other) (on-top-of floor)))
+    (printout t "New sub-goal: move " ?other " to " floor "." crlf)
     )
 
 (defrule clear-lower-block
@@ -82,6 +85,14 @@
     (block ?other)
     =>
     (assert (goal (move ?other) (on-top-of floor)))
+    (printout t "New sub-goal: move " ?other " to " floor "." crlf)
+    )
+
+(defrule clear-null-fact
+    ?f <- (on-top-of (top nothing) (bottom floor))
+    =>
+    (retract ?f)
+    (printout t "deleted empty fact: (top nothing) (bottom floor)." crlf)
     )
 
 (reset)

@@ -4,18 +4,15 @@
     (slot bottom)
     )
 
-;(deftemplate build
-;    (slot block))
-
 (deftemplate goal
     (slot move)
     (slot on-top-of))
 
 ;;;;;;;;;;Initial Facts
-;(batch "case01.clp")
+(batch "case01.clp")
 ;(batch "case02.clp")
 ;(batch "case03.clp")
-(batch "case04.clp")
+;(batch "case04.clp")
 
 
 
@@ -33,6 +30,28 @@
     (assert (on-top-of (top nothing) (bottom ?other)))
     (printout t ?tp " moved on top of " ?bm "." crlf)
     )
+/*
+(defrule move-directly
+    ?goal <- (goal (move ?tp) (on-top-of ?bm))
+    (block ?tp)
+    (block ?bm)
+    (on-top-of (top nothing) (bottom ?tp))
+    ?s1 <- (on-top-of (top ?tp) (bottom ?other))
+    ?s2 <- (on-top-of (top nothing) (bottom ?bm))
+    =>
+    (retract ?goal ?s1 ?s2)
+    (assert (on-top-of (top ?tp) (bottom ?bm)))
+    (assert (on-top-of (top nothing) (bottom ?other)))
+    (printout t ?tp " moved on top of " ?bm "." crlf)
+    )
+
+*/
+
+
+
+
+
+
 
 (defrule move-to-floor
     ?goal <- (goal (move ?tp) (on-top-of floor))

@@ -30,10 +30,10 @@
     (on-top-of (top nothing) (bottom J))
     (on-top-of (top J) (bottom floor))
 
-    (goal (move E) (on-top-of floor))
-    (goal (move L) (on-top-of E))
-    (goal (move B) (on-top-of L))
-    (goal (move A) (on-top-of B))
-    (goal (move T) (on-top-of A))
+    (goal (move E) (on-top-of floor) (state unsatisfied) (step 0))
+    (goal (move L) (on-top-of E) (state new) (step 1))
+    (goal (move B) (on-top-of L) (state new) (step 2))
+    (goal (move A) (on-top-of B) (state new) (step 3))
+    (goal (move T) (on-top-of A) (state new) (step 4))
     
     )

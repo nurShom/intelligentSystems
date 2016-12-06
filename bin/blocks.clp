@@ -18,10 +18,10 @@
     )
 
 ;;;;;;;;;;Initial Facts
-(batch "case01.clp")
+;(batch "case01.clp")
 ;(batch "case02.clp")
 ;(batch "case03.clp")
-;(batch "case04.clp")
+(batch "case04.clp")
 
 (deffacts step-0
     (step (count 0))

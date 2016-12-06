@@ -1,0 +1,305 @@
+
+Jess, the Rule Engine for the Java Platform
+Copyright (C) 2008 Sandia Corporation
+Jess Version 7.1p2 11/5/2008
+
+Jess> (batch "blocks.clp")
+TRUE
+Jess> (watch all)
+TRUE
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block X)
+f-2   (MAIN::block B)
+f-3   (MAIN::block E)
+f-4   (MAIN::block A)
+f-5   (MAIN::block T)
+f-6   (MAIN::block L)
+f-7   (MAIN::block Q)
+f-8   (MAIN::block D)
+f-9   (MAIN::block R)
+f-10   (MAIN::block J)
+f-11   (MAIN::on-top-of (top nothing) (bottom X))
+f-12   (MAIN::on-top-of (top X) (bottom floor))
+f-13   (MAIN::on-top-of (top nothing) (bottom B))
+f-14   (MAIN::on-top-of (top B) (bottom E))
+f-15   (MAIN::on-top-of (top E) (bottom A))
+f-16   (MAIN::on-top-of (top A) (bottom T))
+f-17   (MAIN::on-top-of (top T) (bottom floor))
+f-18   (MAIN::on-top-of (top nothing) (bottom L))
+f-19   (MAIN::on-top-of (top L) (bottom Q))
+f-20   (MAIN::on-top-of (top Q) (bottom floor))
+f-21   (MAIN::on-top-of (top nothing) (bottom D))
+f-22   (MAIN::on-top-of (top D) (bottom R))
+f-23   (MAIN::on-top-of (top R) (bottom floor))
+f-24   (MAIN::on-top-of (top nothing) (bottom J))
+f-25   (MAIN::on-top-of (top J) (bottom floor))
+f-26   (MAIN::goal (move E) (on-top-of floor) (state unsatisfied) (step 0))
+f-27   (MAIN::goal (move L) (on-top-of E) (state new) (step 1))
+f-28   (MAIN::goal (move B) (on-top-of L) (state new) (step 2))
+f-29   (MAIN::goal (move A) (on-top-of B) (state new) (step 3))
+f-30   (MAIN::goal (move T) (on-top-of A) (state new) (step 4))
+f-31   (MAIN::step (count 0))
+For a total of 32 facts in module MAIN.
+Jess> (agenda)
+[Activation: MAIN::clear-upper-block  f-26, f-3, f-14, f-2 ; time=27 ; totalTime=49 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::clear-upper-block f-26, f-3, f-14, f-2
+ ==> f-32 (MAIN::goal (move B) (on-top-of floor) (state unsatisfied) (step nil))
+==> Activation: MAIN::move-to-floor :  f-32, f-2, f-13, f-14
+New sub-goal: move B to floor.
+1
+Jess> (run 1)
+FIRE 1 MAIN::move-to-floor f-32, f-2, f-13, f-14
+ <== f-14 (MAIN::on-top-of (top B) (bottom E))
+ <=> f-32 (MAIN::goal (move B) (on-top-of floor) (state satisfied) (step nil))
+ ==> f-33 (MAIN::on-top-of (top B) (bottom floor))
+ ==> f-34 (MAIN::on-top-of (top nothing) (bottom E))
+==> Activation: MAIN::move-to-floor :  f-26, f-3, f-34, f-15
+B moved to floor.
+1
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block X)
+f-2   (MAIN::block B)
+f-3   (MAIN::block E)
+f-4   (MAIN::block A)
+f-5   (MAIN::block T)
+f-6   (MAIN::block L)
+f-7   (MAIN::block Q)
+f-8   (MAIN::block D)
+f-9   (MAIN::block R)
+f-10   (MAIN::block J)
+f-11   (MAIN::on-top-of (top nothing) (bottom X))
+f-12   (MAIN::on-top-of (top X) (bottom floor))
+f-13   (MAIN::on-top-of (top nothing) (bottom B))
+f-15   (MAIN::on-top-of (top E) (bottom A))
+f-16   (MAIN::on-top-of (top A) (bottom T))
+f-17   (MAIN::on-top-of (top T) (bottom floor))
+f-18   (MAIN::on-top-of (top nothing) (bottom L))
+f-19   (MAIN::on-top-of (top L) (bottom Q))
+f-20   (MAIN::on-top-of (top Q) (bottom floor))
+f-21   (MAIN::on-top-of (top nothing) (bottom D))
+f-22   (MAIN::on-top-of (top D) (bottom R))
+f-23   (MAIN::on-top-of (top R) (bottom floor))
+f-24   (MAIN::on-top-of (top nothing) (bottom J))
+f-25   (MAIN::on-top-of (top J) (bottom floor))
+f-26   (MAIN::goal (move E) (on-top-of floor) (state unsatisfied) (step 0))
+f-27   (MAIN::goal (move L) (on-top-of E) (state new) (step 1))
+f-28   (MAIN::goal (move B) (on-top-of L) (state new) (step 2))
+f-29   (MAIN::goal (move A) (on-top-of B) (state new) (step 3))
+f-30   (MAIN::goal (move T) (on-top-of A) (state new) (step 4))
+f-31   (MAIN::step (count 0))
+f-32   (MAIN::goal (move B) (on-top-of floor) (state satisfied) (step nil))
+f-33   (MAIN::on-top-of (top B) (bottom floor))
+f-34   (MAIN::on-top-of (top nothing) (bottom E))
+For a total of 34 facts in module MAIN.
+Jess> (agenda)
+[Activation: MAIN::move-to-floor  f-26, f-3, f-34, f-15 ; time=38 ; totalTime=85 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::move-to-floor f-26, f-3, f-34, f-15
+ <== f-15 (MAIN::on-top-of (top E) (bottom A))
+ <=> f-26 (MAIN::goal (move E) (on-top-of floor) (state satisfied) (step 0))
+==> Activation: MAIN::enable-next-goal :  f-26, f-31, f-27
+ ==> f-35 (MAIN::on-top-of (top E) (bottom floor))
+ ==> f-36 (MAIN::on-top-of (top nothing) (bottom A))
+E moved to floor.
+1
+Jess> (agenda)
+[Activation: MAIN::enable-next-goal  f-26, f-31, f-27 ; time=41 ; totalTime=101 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::enable-next-goal f-26, f-31, f-27
+ <=> f-31 (MAIN::step (count 1))
+ <=> f-27 (MAIN::goal (move L) (on-top-of E) (state unsatisfied) (step 1))
+==> Activation: MAIN::move-directly :  f-27, f-6, f-3, f-18, f-19, f-34
+1
+Jess> (agenda)
+[Activation: MAIN::move-directly  f-27, f-6, f-3, f-18, f-19, f-34 ; time=47 ; totalTime=135 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::move-directly f-27, f-6, f-3, f-18, f-19, f-34
+ <== f-19 (MAIN::on-top-of (top L) (bottom Q))
+ <== f-34 (MAIN::on-top-of (top nothing) (bottom E))
+ <=> f-27 (MAIN::goal (move L) (on-top-of E) (state satisfied) (step 1))
+==> Activation: MAIN::enable-next-goal :  f-27, f-31, f-28
+ ==> f-37 (MAIN::on-top-of (top L) (bottom E))
+ ==> f-38 (MAIN::on-top-of (top nothing) (bottom Q))
+L moved on top of E.
+1
+Jess> (run 1)
+FIRE 1 MAIN::enable-next-goal f-27, f-31, f-28
+ <=> f-31 (MAIN::step (count 2))
+ <=> f-28 (MAIN::goal (move B) (on-top-of L) (state unsatisfied) (step 2))
+==> Activation: MAIN::move-directly :  f-28, f-2, f-6, f-13, f-33, f-18
+1
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block X)
+f-2   (MAIN::block B)
+f-3   (MAIN::block E)
+f-4   (MAIN::block A)
+f-5   (MAIN::block T)
+f-6   (MAIN::block L)
+f-7   (MAIN::block Q)
+f-8   (MAIN::block D)
+f-9   (MAIN::block R)
+f-10   (MAIN::block J)
+f-11   (MAIN::on-top-of (top nothing) (bottom X))
+f-12   (MAIN::on-top-of (top X) (bottom floor))
+f-13   (MAIN::on-top-of (top nothing) (bottom B))
+f-16   (MAIN::on-top-of (top A) (bottom T))
+f-17   (MAIN::on-top-of (top T) (bottom floor))
+f-18   (MAIN::on-top-of (top nothing) (bottom L))
+f-20   (MAIN::on-top-of (top Q) (bottom floor))
+f-21   (MAIN::on-top-of (top nothing) (bottom D))
+f-22   (MAIN::on-top-of (top D) (bottom R))
+f-23   (MAIN::on-top-of (top R) (bottom floor))
+f-24   (MAIN::on-top-of (top nothing) (bottom J))
+f-25   (MAIN::on-top-of (top J) (bottom floor))
+f-26   (MAIN::goal (move E) (on-top-of floor) (state satisfied) (step 0))
+f-27   (MAIN::goal (move L) (on-top-of E) (state satisfied) (step 1))
+f-28   (MAIN::goal (move B) (on-top-of L) (state unsatisfied) (step 2))
+f-29   (MAIN::goal (move A) (on-top-of B) (state new) (step 3))
+f-30   (MAIN::goal (move T) (on-top-of A) (state new) (step 4))
+f-31   (MAIN::step (count 2))
+f-32   (MAIN::goal (move B) (on-top-of floor) (state satisfied) (step nil))
+f-33   (MAIN::on-top-of (top B) (bottom floor))
+f-35   (MAIN::on-top-of (top E) (bottom floor))
+f-36   (MAIN::on-top-of (top nothing) (bottom A))
+f-37   (MAIN::on-top-of (top L) (bottom E))
+f-38   (MAIN::on-top-of (top nothing) (bottom Q))
+For a total of 35 facts in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::move-directly f-28, f-2, f-6, f-13, f-33, f-18
+ <== f-33 (MAIN::on-top-of (top B) (bottom floor))
+ <== f-18 (MAIN::on-top-of (top nothing) (bottom L))
+ <=> f-28 (MAIN::goal (move B) (on-top-of L) (state satisfied) (step 2))
+==> Activation: MAIN::enable-next-goal :  f-28, f-31, f-29
+ ==> f-39 (MAIN::on-top-of (top B) (bottom L))
+ ==> f-40 (MAIN::on-top-of (top nothing) (bottom floor))
+==> Activation: MAIN::clear-null-fact :  f-40
+B moved on top of L.
+1
+Jess> (run 1)
+FIRE 1 MAIN::clear-null-fact f-40
+ <== f-40 (MAIN::on-top-of (top nothing) (bottom floor))
+deleted empty fact: (top nothing) (bottom floor).
+1
+Jess> (run 1)
+FIRE 1 MAIN::enable-next-goal f-28, f-31, f-29
+ <=> f-31 (MAIN::step (count 3))
+ <=> f-29 (MAIN::goal (move A) (on-top-of B) (state unsatisfied) (step 3))
+==> Activation: MAIN::move-directly :  f-29, f-4, f-2, f-36, f-16, f-13
+1
+Jess> (run 1)
+FIRE 1 MAIN::move-directly f-29, f-4, f-2, f-36, f-16, f-13
+ <== f-16 (MAIN::on-top-of (top A) (bottom T))
+ <== f-13 (MAIN::on-top-of (top nothing) (bottom B))
+ <=> f-29 (MAIN::goal (move A) (on-top-of B) (state satisfied) (step 3))
+==> Activation: MAIN::enable-next-goal :  f-29, f-31, f-30
+ ==> f-41 (MAIN::on-top-of (top A) (bottom B))
+ ==> f-42 (MAIN::on-top-of (top nothing) (bottom T))
+A moved on top of B.
+1
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block X)
+f-2   (MAIN::block B)
+f-3   (MAIN::block E)
+f-4   (MAIN::block A)
+f-5   (MAIN::block T)
+f-6   (MAIN::block L)
+f-7   (MAIN::block Q)
+f-8   (MAIN::block D)
+f-9   (MAIN::block R)
+f-10   (MAIN::block J)
+f-11   (MAIN::on-top-of (top nothing) (bottom X))
+f-12   (MAIN::on-top-of (top X) (bottom floor))
+f-17   (MAIN::on-top-of (top T) (bottom floor))
+f-20   (MAIN::on-top-of (top Q) (bottom floor))
+f-21   (MAIN::on-top-of (top nothing) (bottom D))
+f-22   (MAIN::on-top-of (top D) (bottom R))
+f-23   (MAIN::on-top-of (top R) (bottom floor))
+f-24   (MAIN::on-top-of (top nothing) (bottom J))
+f-25   (MAIN::on-top-of (top J) (bottom floor))
+f-26   (MAIN::goal (move E) (on-top-of floor) (state satisfied) (step 0))
+f-27   (MAIN::goal (move L) (on-top-of E) (state satisfied) (step 1))
+f-28   (MAIN::goal (move B) (on-top-of L) (state satisfied) (step 2))
+f-29   (MAIN::goal (move A) (on-top-of B) (state satisfied) (step 3))
+f-30   (MAIN::goal (move T) (on-top-of A) (state new) (step 4))
+f-31   (MAIN::step (count 3))
+f-32   (MAIN::goal (move B) (on-top-of floor) (state satisfied) (step nil))
+f-35   (MAIN::on-top-of (top E) (bottom floor))
+f-36   (MAIN::on-top-of (top nothing) (bottom A))
+f-37   (MAIN::on-top-of (top L) (bottom E))
+f-38   (MAIN::on-top-of (top nothing) (bottom Q))
+f-39   (MAIN::on-top-of (top B) (bottom L))
+f-41   (MAIN::on-top-of (top A) (bottom B))
+f-42   (MAIN::on-top-of (top nothing) (bottom T))
+For a total of 34 facts in module MAIN.
+Jess> (agenda)
+[Activation: MAIN::enable-next-goal  f-29, f-31, f-30 ; time=72 ; totalTime=169 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (run 2)
+FIRE 1 MAIN::enable-next-goal f-29, f-31, f-30
+ <=> f-31 (MAIN::step (count 4))
+ <=> f-30 (MAIN::goal (move T) (on-top-of A) (state unsatisfied) (step 4))
+==> Activation: MAIN::move-directly :  f-30, f-5, f-4, f-42, f-17, f-36
+FIRE 2 MAIN::move-directly f-30, f-5, f-4, f-42, f-17, f-36
+ <== f-17 (MAIN::on-top-of (top T) (bottom floor))
+ <== f-36 (MAIN::on-top-of (top nothing) (bottom A))
+ <=> f-30 (MAIN::goal (move T) (on-top-of A) (state satisfied) (step 4))
+ ==> f-43 (MAIN::on-top-of (top T) (bottom A))
+ ==> f-44 (MAIN::on-top-of (top nothing) (bottom floor))
+==> Activation: MAIN::clear-null-fact :  f-44
+T moved on top of A.
+2
+Jess> (agenda)
+[Activation: MAIN::clear-null-fact  f-44 ; time=84 ; totalTime=84 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::clear-null-fact f-44
+ <== f-44 (MAIN::on-top-of (top nothing) (bottom floor))
+deleted empty fact: (top nothing) (bottom floor).
+1
+Jess> (agenda)
+For a total of 0 activations in module MAIN.
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block X)
+f-2   (MAIN::block B)
+f-3   (MAIN::block E)
+f-4   (MAIN::block A)
+f-5   (MAIN::block T)
+f-6   (MAIN::block L)
+f-7   (MAIN::block Q)
+f-8   (MAIN::block D)
+f-9   (MAIN::block R)
+f-10   (MAIN::block J)
+f-11   (MAIN::on-top-of (top nothing) (bottom X))
+f-12   (MAIN::on-top-of (top X) (bottom floor))
+f-20   (MAIN::on-top-of (top Q) (bottom floor))
+f-21   (MAIN::on-top-of (top nothing) (bottom D))
+f-22   (MAIN::on-top-of (top D) (bottom R))
+f-23   (MAIN::on-top-of (top R) (bottom floor))
+f-24   (MAIN::on-top-of (top nothing) (bottom J))
+f-25   (MAIN::on-top-of (top J) (bottom floor))
+f-26   (MAIN::goal (move E) (on-top-of floor) (state satisfied) (step 0))
+f-27   (MAIN::goal (move L) (on-top-of E) (state satisfied) (step 1))
+f-28   (MAIN::goal (move B) (on-top-of L) (state satisfied) (step 2))
+f-29   (MAIN::goal (move A) (on-top-of B) (state satisfied) (step 3))
+f-30   (MAIN::goal (move T) (on-top-of A) (state satisfied) (step 4))
+f-31   (MAIN::step (count 4))
+f-32   (MAIN::goal (move B) (on-top-of floor) (state satisfied) (step nil))
+f-35   (MAIN::on-top-of (top E) (bottom floor))
+f-37   (MAIN::on-top-of (top L) (bottom E))
+f-38   (MAIN::on-top-of (top nothing) (bottom Q))
+f-39   (MAIN::on-top-of (top B) (bottom L))
+f-41   (MAIN::on-top-of (top A) (bottom B))
+f-42   (MAIN::on-top-of (top nothing) (bottom T))
+f-43   (MAIN::on-top-of (top T) (bottom A))
+For a total of 33 facts in module MAIN.
+Jess> (exit)

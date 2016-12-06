@@ -1,2 +1,0 @@
-# intelligentSystems
-academic projects

@@ -3,9 +3,19 @@
 	<name>intelligentSystems</name>
 	<comment></comment>
 	<projects>
+		<name>BlocksWorld-RBS</name>
+		<name>GeneralSpaceSearch</name>
 	</projects>
 	<buildSpec>
 	</buildSpec>
 	<natures>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
 </projectDescription>

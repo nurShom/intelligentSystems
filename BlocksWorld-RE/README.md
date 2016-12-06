@@ -1,5 +1,6 @@
+
 # intelligentSystems
-academic projects
+# => academic projects with Intellegent Systems
 
 # BlockWorld-RE
 

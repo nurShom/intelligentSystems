@@ -17,6 +17,6 @@
     (on-top-of (top E) (bottom F))
     (on-top-of (top F) (bottom floor))
     
-    (goal (move C) (on-top-of E))
+    (goal (move C) (on-top-of E) (state unsatisfied))
 
     )

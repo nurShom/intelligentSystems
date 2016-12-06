@@ -1,0 +1,148 @@
+
+Jess, the Rule Engine for the Java Platform
+Copyright (C) 2008 Sandia Corporation
+Jess Version 7.1p2 11/5/2008
+
+Jess> (batch "blocks.clp")
+TRUE
+Jess> (watch all)
+TRUE
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block A)
+f-2   (MAIN::block B)
+f-3   (MAIN::block C)
+f-4   (MAIN::on-top-of (top nothing) (bottom B))
+f-5   (MAIN::on-top-of (top B) (bottom floor))
+f-6   (MAIN::on-top-of (top nothing) (bottom C))
+f-7   (MAIN::on-top-of (top C) (bottom A))
+f-8   (MAIN::on-top-of (top A) (bottom floor))
+f-9   (MAIN::goal (move C) (on-top-of floor) (state unsatisfied) (step 0))
+f-10   (MAIN::goal (move B) (on-top-of C) (state new) (step 1))
+f-11   (MAIN::goal (move A) (on-top-of B) (state new) (step 2))
+f-12   (MAIN::step (count 0))
+For a total of 13 facts in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::move-to-floor f-9, f-3, f-6, f-7
+ <== f-7 (MAIN::on-top-of (top C) (bottom A))
+ <=> f-9 (MAIN::goal (move C) (on-top-of floor) (state satisfied) (step 0))
+==> Activation: MAIN::enable-next-goal :  f-9, f-12, f-10
+ ==> f-13 (MAIN::on-top-of (top C) (bottom floor))
+ ==> f-14 (MAIN::on-top-of (top nothing) (bottom A))
+C moved to floor.
+1
+Jess> (agenda)
+[Activation: MAIN::enable-next-goal  f-9, f-12, f-10 ; time=16 ; totalTime=40 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block A)
+f-2   (MAIN::block B)
+f-3   (MAIN::block C)
+f-4   (MAIN::on-top-of (top nothing) (bottom B))
+f-5   (MAIN::on-top-of (top B) (bottom floor))
+f-6   (MAIN::on-top-of (top nothing) (bottom C))
+f-8   (MAIN::on-top-of (top A) (bottom floor))
+f-9   (MAIN::goal (move C) (on-top-of floor) (state satisfied) (step 0))
+f-10   (MAIN::goal (move B) (on-top-of C) (state new) (step 1))
+f-11   (MAIN::goal (move A) (on-top-of B) (state new) (step 2))
+f-12   (MAIN::step (count 0))
+f-13   (MAIN::on-top-of (top C) (bottom floor))
+f-14   (MAIN::on-top-of (top nothing) (bottom A))
+For a total of 14 facts in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::enable-next-goal f-9, f-12, f-10
+ <=> f-12 (MAIN::step (count 1))
+ <=> f-10 (MAIN::goal (move B) (on-top-of C) (state unsatisfied) (step 1))
+==> Activation: MAIN::move-directly :  f-10, f-2, f-3, f-4, f-5, f-6
+1
+Jess> (run 1)
+FIRE 1 MAIN::move-directly f-10, f-2, f-3, f-4, f-5, f-6
+ <== f-5 (MAIN::on-top-of (top B) (bottom floor))
+ <== f-6 (MAIN::on-top-of (top nothing) (bottom C))
+ <=> f-10 (MAIN::goal (move B) (on-top-of C) (state satisfied) (step 1))
+==> Activation: MAIN::enable-next-goal :  f-10, f-12, f-11
+ ==> f-15 (MAIN::on-top-of (top B) (bottom C))
+ ==> f-16 (MAIN::on-top-of (top nothing) (bottom floor))
+==> Activation: MAIN::clear-null-fact :  f-16
+B moved on top of C.
+1
+Jess> (run 1)
+FIRE 1 MAIN::clear-null-fact f-16
+ <== f-16 (MAIN::on-top-of (top nothing) (bottom floor))
+deleted empty fact: (top nothing) (bottom floor).
+1
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block A)
+f-2   (MAIN::block B)
+f-3   (MAIN::block C)
+f-4   (MAIN::on-top-of (top nothing) (bottom B))
+f-8   (MAIN::on-top-of (top A) (bottom floor))
+f-9   (MAIN::goal (move C) (on-top-of floor) (state satisfied) (step 0))
+f-10   (MAIN::goal (move B) (on-top-of C) (state satisfied) (step 1))
+f-11   (MAIN::goal (move A) (on-top-of B) (state new) (step 2))
+f-12   (MAIN::step (count 1))
+f-13   (MAIN::on-top-of (top C) (bottom floor))
+f-14   (MAIN::on-top-of (top nothing) (bottom A))
+f-15   (MAIN::on-top-of (top B) (bottom C))
+For a total of 13 facts in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::enable-next-goal f-10, f-12, f-11
+ <=> f-12 (MAIN::step (count 2))
+ <=> f-11 (MAIN::goal (move A) (on-top-of B) (state unsatisfied) (step 2))
+==> Activation: MAIN::move-directly :  f-11, f-1, f-2, f-14, f-8, f-4
+1
+Jess> (agenda)
+[Activation: MAIN::move-directly  f-11, f-1, f-2, f-14, f-8, f-4 ; time=33 ; totalTime=70 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::move-directly f-11, f-1, f-2, f-14, f-8, f-4
+ <== f-8 (MAIN::on-top-of (top A) (bottom floor))
+ <== f-4 (MAIN::on-top-of (top nothing) (bottom B))
+ <=> f-11 (MAIN::goal (move A) (on-top-of B) (state satisfied) (step 2))
+ ==> f-17 (MAIN::on-top-of (top A) (bottom B))
+ ==> f-18 (MAIN::on-top-of (top nothing) (bottom floor))
+==> Activation: MAIN::clear-null-fact :  f-18
+A moved on top of B.
+1
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block A)
+f-2   (MAIN::block B)
+f-3   (MAIN::block C)
+f-9   (MAIN::goal (move C) (on-top-of floor) (state satisfied) (step 0))
+f-10   (MAIN::goal (move B) (on-top-of C) (state satisfied) (step 1))
+f-11   (MAIN::goal (move A) (on-top-of B) (state satisfied) (step 2))
+f-12   (MAIN::step (count 2))
+f-13   (MAIN::on-top-of (top C) (bottom floor))
+f-14   (MAIN::on-top-of (top nothing) (bottom A))
+f-15   (MAIN::on-top-of (top B) (bottom C))
+f-17   (MAIN::on-top-of (top A) (bottom B))
+f-18   (MAIN::on-top-of (top nothing) (bottom floor))
+For a total of 13 facts in module MAIN.
+Jess> (agenda)
+[Activation: MAIN::clear-null-fact  f-18 ; time=39 ; totalTime=39 ; salience=0]
+For a total of 1 activations in module MAIN.
+Jess> (run 1)
+FIRE 1 MAIN::clear-null-fact f-18
+ <== f-18 (MAIN::on-top-of (top nothing) (bottom floor))
+deleted empty fact: (top nothing) (bottom floor).
+1
+Jess> (agenda)
+For a total of 0 activations in module MAIN.
+Jess> (facts)
+f-0   (MAIN::initial-fact)
+f-1   (MAIN::block A)
+f-2   (MAIN::block B)
+f-3   (MAIN::block C)
+f-9   (MAIN::goal (move C) (on-top-of floor) (state satisfied) (step 0))
+f-10   (MAIN::goal (move B) (on-top-of C) (state satisfied) (step 1))
+f-11   (MAIN::goal (move A) (on-top-of B) (state satisfied) (step 2))
+f-12   (MAIN::step (count 2))
+f-13   (MAIN::on-top-of (top C) (bottom floor))
+f-14   (MAIN::on-top-of (top nothing) (bottom A))
+f-15   (MAIN::on-top-of (top B) (bottom C))
+f-17   (MAIN::on-top-of (top A) (bottom B))
+For a total of 12 facts in module MAIN.
+Jess> (exit)

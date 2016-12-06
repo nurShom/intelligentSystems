@@ -29,10 +29,7 @@
     
     (on-top-of (top nothing) (bottom J))
     (on-top-of (top J) (bottom floor))
-    
-    ;(goal (move T) (on-top-of A))
-    ;(goal (move A) (on-top-of floor))
-    
+
     (goal (move E) (on-top-of floor))
     (goal (move L) (on-top-of E))
     (goal (move B) (on-top-of L))

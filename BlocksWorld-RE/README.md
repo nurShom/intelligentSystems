@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 # intelligentSystems
 academic projects
-=======
+
 # BlockWorld-RE
 
 # This is a Jess Rule engine for fictional Blocks World.
@@ -20,4 +19,3 @@ academic projects
 # 6. From "Work with:" dropdown list, select "The Eclipse Project Updates - http://download.eclipse.org/eclipse/updates/4.6"
 # 7. Check "Eclipse 2.0 Style Plugin Support" under "Eclipse Tests, Examples, and Extras" category
 # 8. Install the software
->>>>>>> BlocksWorld/master
